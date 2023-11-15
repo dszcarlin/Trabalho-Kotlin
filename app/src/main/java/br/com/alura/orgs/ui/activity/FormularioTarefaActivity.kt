@@ -5,12 +5,12 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import br.com.alura.orgs.R
-import br.com.alura.orgs.dao.ProdutosDao
-import br.com.alura.orgs.model.Produto
+import br.com.alura.orgs.dao.TarefasDao
+import br.com.alura.orgs.model.Tarefa
 import java.math.BigDecimal
 
-class FormularioProdutoActivity :
-    AppCompatActivity(R.layout.activity_formulario_produto) {
+class FormularioTarefaActivity :
+    AppCompatActivity(R.layout.activity_formulario_tarefa) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,32 +18,32 @@ class FormularioProdutoActivity :
     }
 
     private fun configuraBotaoSalvar() {
-        val botaoSalvar = findViewById<Button>(R.id.activity_formulario_produto_botao_salvar)
-        val dao = ProdutosDao()
+        val botaoSalvar = findViewById<Button>(R.id.activity_formulario_tarefa_botao_salvar)
+        val dao = TarefasDao()
         botaoSalvar.setOnClickListener {
-            val produtoNovo = criaProduto()
-            dao.adiciona(produtoNovo)
+            val tarefaNovo = criaTarefa()
+            dao.adiciona(tarefaNovo)
             finish()
         }
     }
 
-    private fun criaProduto(): Produto {
-        val campoNome = findViewById<EditText>(R.id.activity_formulario_produto_nome)
+    private fun criaTarefa(): Tarefa {
+        val campoNome = findViewById<EditText>(R.id.activity_formulario_tarefa_nome)
         val nome = campoNome.text.toString()
-        val campoDescricao = findViewById<EditText>(R.id.activity_formulario_produto_descricao)
+        val campoDescricao = findViewById<EditText>(R.id.activity_formulario_tarefa_descricao)
         val descricao = campoDescricao.text.toString()
-        val campoValor = findViewById<EditText>(R.id.activity_formulario_produto_valor)
+        val campoValor = findViewById<EditText>(R.id.activity_formulario_tarefa_data)
         val valorEmTexto = campoValor.text.toString()
-        val valor = if (valorEmTexto.isBlank()) {
+        val data = if (valorEmTexto.isBlank()) {
             BigDecimal.ZERO
         } else {
             BigDecimal(valorEmTexto)
         }
 
-        return Produto(
+        return Tarefa(
                 nome = nome,
                 descricao = descricao,
-                valor = valor
+                data = data
         )
     }
 

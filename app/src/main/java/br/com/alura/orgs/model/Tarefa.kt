@@ -2,8 +2,8 @@ package br.com.alura.orgs.model
 
 import java.math.BigDecimal
 
-data class Produto(
+data class Tarefa(
         val nome: String,
         val descricao: String,
-        val valor: BigDecimal
+        val data: BigDecimal
 )
